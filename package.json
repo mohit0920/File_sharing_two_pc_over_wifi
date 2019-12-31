@@ -1,0 +1,24 @@
+{
+  "name": "file_sharing_two_pc_over_wifi",
+  "version": "1.0.0",
+  "description": "Can be used to share files between two or multiple pc connected over single wifi or mobile hotspot with a speed of 3-4MBps. <ul>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit0920/File_sharing_two_pc_over_wifi.git"
+  },
+  "author": "Mohit Juneja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohit0920/File_sharing_two_pc_over_wifi/issues"
+  },
+  "homepage": "https://github.com/mohit0920/File_sharing_two_pc_over_wifi#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}
