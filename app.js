@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const path = require('path')
+const fs = require('fs')
+const directoryPath = path.join(__dirname, 'Share');
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -16,14 +18,29 @@ app.get("/", (req,res) => {
     		console.error(`exec error: ${error}`);
     		return;
  	 }
-//  	console.log(`stdout: ${ip}`);
-//  	console.error(`stderr: ${stderr}`);
-	res.send("Connected YOOO!! Hurray "+ip)
+
+//  	console.log(`stdout: ${ip}`)
+//  	console.error(`stderr: ${stderr}`)
+	
+	var files_to_share=[]
+	fs.readdir(directoryPath, function (err, files) {
+   		 //handling error
+    		if (err) {
+        		return console.log('Unable to scan directory: ' + err);
+    		} 
+    	//listing all files using forEach
+//    	files.forEach(function (file) {
+        	// Do whatever you want to do with the file
+//        	console.log(file); 
+		files_to_share=files
+//    		});
+	res.send("Connected YOOO!! Hurray "+ip+JSON.stringify(files_to_share))
 	});
+	})
 
 })
 app.get("/:pagename", (req,res) => {
-	res.sendFile(path.join(__dirname +"/"+ req.params.pagename));
+	res.sendFile(path.join(__dirname +"/Share/"+ req.params.pagename));
 })
 app.listen(45678, () =>{
 	console.log("listening on 45678")
