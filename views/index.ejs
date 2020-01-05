@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    SPW
+  </title>
+  <!-- <link rel="stylesheet" type="text/css" href="mypfstyle.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="description" content="File sharing from pc over wifi without internet">
+  <meta charset="utf-8">
+  <meta name="author" content="Mohit Juneja">
+</head>
+<body>
+    <h1>Welcome to Share from PC over WiFi(SPW)</h1>
+    <ul>
+      <!-- <li>Open http://<%-data%>:45678 on all the destination machines.</li> -->
+      <li id="ip_here"></li>
+      <li>Put the file in the Share folder in the repository on the source machine.</li>
+      <li>Make sure you disabled your firewall on source machine for incoming traffic or allow the port numbers 45678/tcp and 80/tcp.</li>
+      <li id="dl">Click to download the file.</li>
+      <span hidden id="the_end"></span>
+    </ul>
+</body>
+<script>
+  var ip_and_filenames=<%-data%>
+  
+  var files=ip_and_filenames.files
+  var ip=ip_and_filenames.ip
+ // console.log(files)
+ // var str_with_ip="Open http://"+ip+":45678 on all the destination machines."
+  var text_node_with_ip = document.createTextNode("Open http://"+ip+":45678 on all the destination machines.")
+  var ip_here = document.getElementById("ip_here")
+  ip_here.appendChild(text_node_with_ip)
+  
+  files.forEach( filename => {
+    var for_file = document.createElement("a")
+    for_file.href = '/'+filename
+    var for_text_filename = document.createTextNode(filename)
+    var new_line = document.createElement("br")
+    for_file.appendChild(for_text_filename)
+    var ending = document.getElementById("the_end")
+    var parentdiv=ending.parentNode
+
+    parentdiv.insertBefore(for_file, ending)
+    parentdiv.insertBefore(new_line, ending)
+  });
+</script>
+<style>
+
+</style>
+
+</html>

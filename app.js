@@ -20,7 +20,7 @@ app.get("/", (req,res) => {
  	 }
 
 //  	console.log(`stdout: ${ip}`)
-//  	console.error(`stderr: ${stderr}`)
+  	// console.error(`stderr: ${stderr}`)
 	
 	var files_to_share=[]
 	fs.readdir(directoryPath, function (err, files) {
@@ -34,7 +34,10 @@ app.get("/", (req,res) => {
 //        	console.log(file); 
 		files_to_share=files
 //    		});
-	res.send("Connected YOOO!! Hurray "+ip+JSON.stringify(files_to_share))
+			
+		var data = {ip: ip.substring(0, ip.length-1), files: files_to_share}
+	res.render('index', {data: JSON.stringify(data)})
+	//res.send("Connected YOOO!! Hurray "+ip+JSON.stringify(files_to_share))
 	});
 	})
 
@@ -43,5 +46,5 @@ app.get("/:pagename", (req,res) => {
 	res.sendFile(path.join(__dirname +"/Share/"+ req.params.pagename));
 })
 app.listen(45678, () =>{
-	console.log("listening on 45678")
+	console.log("listening on 45678. Open http://localhost:45678 for instructions.")
 })
